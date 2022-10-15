@@ -1,81 +1,52 @@
+'use strict';
+
 // Задачи:
 
-// 1) Напишите функцию showExperience, которая будет принимать в себя объект со всеми данными и возвращать строку с опытом.
+// 1) Напишите функцию showFamily, которая будет принимать в себя массив строк и возвращать сообщение в нужном формате.
 
-// Пример:
+// showFamily(family)  => 'Семья состоит из: Peter Ann Alex Linda'
 
-// showExperience(personalPlanPeter) => '1 month'
-
-const personalPlanPeter = {
-    name: "Peter",
-    age: "29",
-    skills: {
-        languages: ['ru', 'eng'],
-        programmingLangs: {
-            js: '20%',
-            php: '10%'
-        },
-        exp: '1 month'
-    },
-    showAgeAndLangs: function(aboutMe) {
-        let lang = '';
-        for (let key in aboutMe.skills.languages) {
-            lang += aboutMe.skills.languages[key];
-            lang += ' ';
-        }
-        return console.log(`Мне ${aboutMe.age} и я владею языками: ${lang.toUpperCase()}`);
-    }
-};
+// Имена подставляются автоматически из массива. Если массив пустой, то выводится сообщение 'Семья пуста'
 
 
-function showExperience(plan) {
-    const showExp = plan.skills.exp;
-    return console.log(showExp);
-}
+const family = ['Peter', 'Ann', 'Alex', 'Linda'];
 
-showExperience(personalPlanPeter);
-
-
-
-
-// 2) Напишите функцию showProgrammingLangs, которая будет принимать в себя объект со всеми данными и возвращать строку в нужном виде.      
-
-// Пример:
-
-// showProgrammingLangs(personalPlanPeter)  =>
-
-// "Язык js изучен на 20% Язык php изучен на 10%"
-
-// Причем функция должна работать вне зависимости от количества языков. Если ни один не указан, то возвращается пустая строка.
-
-// P.S. Для переноса строки используется \n в конце строки.
-
-function showProgrammingLangs(plan) {
-
-    if (Object.keys(plan.skills.programmingLangs) == 0) {
-        return console.log("");
+function showFamily(arr) {
+    if (arr.length === 0) {
+        return console.log('Семья пуста');
     } else {
-        let progLangs = '';
-        for (let key in plan.skills.programmingLangs) {
-            progLangs += `Язык ${key} изучен на ${plan.skills.programmingLangs[key]}`;
-            progLangs += '\n';
-        }
-        return console.log(progLangs);
+        let familyName = '';
+        arr.forEach(function(item) {
+            familyName += item;
+            familyName += ' ';
+        });
+        familyName = familyName.slice(0, -1);
+        return console.log(`Семья состоит из: ${familyName}`);
     }
 }
 
-showProgrammingLangs(personalPlanPeter);
+showFamily(family);
 
 
-// 3) Создайте метод showAgeAndLangs внутри объекта personalPlanPeter. При его вызове метод будет принимать в себя объект и возвращать строку в нужном виде.
+
+// 2) напишите функцию standardizeStrings, которая будет принимать в себя массив строк и будет выводить в консоль эти строки в нижнем регистре.
 
 // Пример:
 
-// personalPlanPeter.showAgeAndLangs(personalPlanPeter)
-// => 'Мне 29 и я владею языками: RU ENG'
+// standardizeStrings(favoriteCities)  выведет в консоль
 
-// Заметьте, что возраст и языки подставляются автоматически из объекта, а языки всегда в верхнем регистре (большими буквами). Если данные в объекте поменяются, то и сообщение тоже изменится.
+// lisbon
+// rome
+// milan
+// dublin
+// Это частая задача в реальности, так как от пользователя нам могут прийти ответы в самых разных форматах. В том числе и с разными буквами :) Поэтому нам нужно привести строки в один формат для правильной работы.
 
-// P.S. Дальше по курсу мы научимся удобно обращаться из метода к самому объекту, в котором он расположен. Но пока делаем это менее удобным способом)
+const favoriteCities = ['liSBon', 'ROME', 'miLan', 'Dublin'];
 
-personalPlanPeter.showAgeAndLangs(personalPlanPeter);
+function standardizeStrings(arr) {
+    arr.forEach(function(item) {
+        console.log(item.toLowerCase());
+    });
+}
+
+standardizeStrings(favoriteCities);
