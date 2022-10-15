@@ -21,7 +21,6 @@ const personalPlanPeter = {
     }
 };
 
-console.log(personalPlanPeter.skills.programmingLangs == '');
 
 function showExperience(plan) {
     const showExp = plan.skills.exp;
@@ -46,14 +45,26 @@ showExperience(personalPlanPeter);
 // P.S. Для переноса строки используется \n в конце строки.
 
 function showProgrammingLangs(plan) {
-    
-    if (isEmpty(plan.skills.programmingLangs) == false) {
-        return console.log("''");
-    } else {
-        const {js, php} = plan.skills.programmingLangs;
-        const programmingLangs = `Язык js изучен на ${js} Язык php изучен на ${php}`;
-        return console.log(programmingLangs);
+
+    for (let key in plan) {
+
+        if (plan[key] == 'object') {
+            for (let i in plan[key]) {
+                console.log(`${i} = ${plan[key][i]}`);
+            }
+        } else {
+            console.log(`${key} = ${plan[key]}`);
+        }
     }
+
+
+    // if (isEmpty(plan.skills.programmingLangs) == false) {
+    //     return console.log("''");
+    // } else {
+    //     const {js, php} = plan.skills.programmingLangs;
+    //     const programmingLangs = `Язык js изучен на ${js} Язык php изучен на ${php}`;
+    //     return console.log(programmingLangs);
+    // }
 }
 
 showProgrammingLangs(personalPlanPeter);
