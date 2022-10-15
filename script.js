@@ -1,45 +1,59 @@
 'use strict';
 
-// Задача:
+// Задачи:
 
-// Создайте функцию, которая будет принимать в себя один аргумент-целое положительное число. Она должна возвращать строку, в которой будут через пробел выведены числа Фибоначчи. Причем, их количество должно быть равно переданному аргументу.
-
-// Если переданный аргумент не число - вернуть пустую строку. Решать без применения рекурсии.
+// 1) Напишите функцию showExperience, которая будет принимать в себя объект со всеми данными и возвращать строку с опытом.
 
 // Пример:
 
-// fib(4) => "0 1 1 2"
+// showExperience(personalPlanPeter) => '1 month'
 
-// fib(7) => "0 1 1 2 3 5 8"
+const personalPlanPeter = {
+    name: "Peter",
+    age: "29",
+    skills: {
+        languages: ['ru', 'eng'],
+        programmingLangs: {
+            // js: '20%',
+            // php: '10%'
+        },
+        exp: '1 month'
+    }
+};
 
-// fib('7') => ""
+console.log(personalPlanPeter.skills.programmingLangs == '');
 
-// fib(1) => "0"
+function showExperience(plan) {
+    const showExp = plan.skills.exp;
+    return console.log(showExp);
+}
 
-// fib(0) => ""
+showExperience(personalPlanPeter);
 
-function fib(num) {
-    let result = [];
-    let strResult = "";
-    if (typeof num !== 'number' || num === 0 || !Number.isInteger(num)) {
-        return console.log('""');
+
+
+
+// 2) Напишите функцию showProgrammingLangs, которая будет принимать в себя объект со всеми данными и возвращать строку в нужном виде.
+
+// Пример:
+
+// showProgrammingLangs(personalPlanPeter)  =>
+
+// "Язык js изучен на 20% Язык php изучен на 10%"
+
+// Причем функция должна работать вне зависимости от количества языков. Если ни один не указан, то возвращается пустая строка.
+
+// P.S. Для переноса строки используется \n в конце строки.
+
+function showProgrammingLangs(plan) {
+    
+    if (isEmpty(plan.skills.programmingLangs) == false) {
+        return console.log("''");
     } else {
-        for (let i = 0; i < num; i++) {
-            if (i > 1) {
-               result[i] = result[i-2] + result[i-1]; 
-            } else {
-                result[i] = i;
-            }
-
-            if (i+1 === num) {
-                strResult += result[i];
-                return console.log(strResult);
-            } else {
-                strResult += result[i];
-                strResult += ' ';
-            }
-        }
+        const {js, php} = plan.skills.programmingLangs;
+        const programmingLangs = `Язык js изучен на ${js} Язык php изучен на ${php}`;
+        return console.log(programmingLangs);
     }
 }
 
-fib(4.1);
+showProgrammingLangs(personalPlanPeter);
