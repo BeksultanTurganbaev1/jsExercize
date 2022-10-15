@@ -1,5 +1,3 @@
-'use strict';
-
 // Задачи:
 
 // 1) Напишите функцию showExperience, которая будет принимать в себя объект со всеми данными и возвращать строку с опытом.
@@ -14,10 +12,18 @@ const personalPlanPeter = {
     skills: {
         languages: ['ru', 'eng'],
         programmingLangs: {
-            // js: '20%',
-            // php: '10%'
+            js: '20%',
+            php: '10%'
         },
         exp: '1 month'
+    },
+    showAgeAndLangs: function(aboutMe) {
+        let lang = '';
+        for (let key in aboutMe.skills.languages) {
+            lang += aboutMe.skills.languages[key];
+            lang += ' ';
+        }
+        return console.log(`Мне ${aboutMe.age} и я владею языками: ${lang.toUpperCase()}`);
     }
 };
 
@@ -32,7 +38,7 @@ showExperience(personalPlanPeter);
 
 
 
-// 2) Напишите функцию showProgrammingLangs, которая будет принимать в себя объект со всеми данными и возвращать строку в нужном виде.
+// 2) Напишите функцию showProgrammingLangs, которая будет принимать в себя объект со всеми данными и возвращать строку в нужном виде.      
 
 // Пример:
 
@@ -46,25 +52,30 @@ showExperience(personalPlanPeter);
 
 function showProgrammingLangs(plan) {
 
-    for (let key in plan) {
-
-        if (plan[key] == 'object') {
-            for (let i in plan[key]) {
-                console.log(`${i} = ${plan[key][i]}`);
-            }
-        } else {
-            console.log(`${key} = ${plan[key]}`);
+    if (Object.keys(plan.skills.programmingLangs) == 0) {
+        return console.log("");
+    } else {
+        let progLangs = '';
+        for (let key in plan.skills.programmingLangs) {
+            progLangs += `Язык ${key} изучен на ${plan.skills.programmingLangs[key]}`;
+            progLangs += '\n';
         }
+        return console.log(progLangs);
     }
-
-
-    // if (isEmpty(plan.skills.programmingLangs) == false) {
-    //     return console.log("''");
-    // } else {
-    //     const {js, php} = plan.skills.programmingLangs;
-    //     const programmingLangs = `Язык js изучен на ${js} Язык php изучен на ${php}`;
-    //     return console.log(programmingLangs);
-    // }
 }
 
 showProgrammingLangs(personalPlanPeter);
+
+
+// 3) Создайте метод showAgeAndLangs внутри объекта personalPlanPeter. При его вызове метод будет принимать в себя объект и возвращать строку в нужном виде.
+
+// Пример:
+
+// personalPlanPeter.showAgeAndLangs(personalPlanPeter)
+// => 'Мне 29 и я владею языками: RU ENG'
+
+// Заметьте, что возраст и языки подставляются автоматически из объекта, а языки всегда в верхнем регистре (большими буквами). Если данные в объекте поменяются, то и сообщение тоже изменится.
+
+// P.S. Дальше по курсу мы научимся удобно обращаться из метода к самому объекту, в котором он расположен. Но пока делаем это менее удобным способом)
+
+personalPlanPeter.showAgeAndLangs(personalPlanPeter);
